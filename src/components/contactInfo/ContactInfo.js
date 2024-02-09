@@ -1,5 +1,5 @@
 import React from 'react';
-import useContactInfo from '@/hooks/swr/useContactInfo';
+import useContactInfo from '@/hooks/rq/useContactInfo';
 
 const ContactInfo = ({ socCode }) => {
   const {contactInfo: contactInfo, isLoading: isLoadingContactInfo} = useContactInfo();

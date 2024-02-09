@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { unAuthorizedFetcher as fetcher } from '@/utils/swr/fetcher';
 
 const jobDetailStore = create((set) => ({
@@ -19,16 +19,13 @@ const jobDetailStore = create((set) => ({
 export const useJobDetail = (jobId) => {
   const { jobDetail, setJobDetail } = jobDetailStore();
 
-  useQuery(
-    ['jobDetail', jobId],
-    () =>
+  useQuery({
+    queryKey: ['jobDetail', jobId],
+    queryFn: () =>
       fetcher(
         `${process.env.NEXT_PUBLIC_VENDORS_PROXY_URL}/lightcast/jpa/postings/${jobId}`
       ),
-    {
-      onSuccess: setJobDetail,
-    }
-  );
+  });
 
   return jobDetail;
 };

@@ -1,18 +1,18 @@
 import React from 'react';
-import {useJobDetail} from '@/store/jobDetailStore';
+import {useJobDetails} from '@/hooks/rq/useJobDetails';
 
 const JobDetail = ({ jobId }) => {
-  const jobDetail = useJobDetail(jobId);
+  const {data, isLoading, isError} = useJobDetails(jobId);
 
-  if (!jobDetail) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
       {jobId}
-      <h1>{jobDetail.title_raw}</h1>
-      <p>{jobDetail.body}</p>
+      <h1>{data?.data.title_raw}</h1>
+      <p>{data?.data.body}</p>
       {/* Render other job details */}
     </div>
   );
