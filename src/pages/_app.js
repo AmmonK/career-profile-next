@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { AppCacheProvider } from '@mui/material-nextjs/v14-pagesRouter';
@@ -8,8 +8,10 @@ import theme from '@/styles/theme';
 import { SessionProvider } from 'next-auth/react';
 import MfeNav from '@/components/mfe-nav/MfeNav';
 import { Container } from '@mui/material';
+import { persistQueryClient } from '@tanstack/react-query-persist-client';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export default function MyApp(props) {
   const {
@@ -17,8 +19,32 @@ export default function MyApp(props) {
     pageProps: { session, ...pageProps },
   } = props;
 
+  // const [client] = useState(
+  //   new QueryClient({
+  //     defaultOptions: {
+  //       queries: {
+  //         cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+  //       },
+  //     },
+  //   })
+  // );
 
-  const [client] = useState(new QueryClient())
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: {
+        cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+      },
+    },
+  });
+
+  // const localStoragePersister = createSyncStoragePersister({
+  //   storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+  // });
+
+  // persistQueryClient({
+  //   client,
+  //   persister: localStoragePersister,
+  // });
 
   return (
     <SessionProvider session={session} basePath="/job-explorer/api/auth">
