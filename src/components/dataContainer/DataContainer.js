@@ -3,10 +3,14 @@ import usePrimaryProgram from '@/hooks/rq/usePrimaryProgram';
 import useSocCodes from '@/hooks/rq/useSocCodes';
 import useContactInfo from '@/hooks/rq/useContactInfo';
 import useJobPostings from '@/hooks/rq/useJobPostings';
-import { useEffect } from 'react';
 import { Chip } from '@mui/material';
+import filterStore from '@/stores/filterStore';
+import jobPostingStore from '@/stores/jobPostingStore';
+import { useEffect } from 'react';
 
 const DataContainer = ({ children }) => {
+  const { remote,fulltime } = filterStore((state) => state);
+  const { setPostings } = jobPostingStore((state) => state);
 
   const { data: userInformation, isLoading: isLoadingUserInfo } = useUserInfo();
 
@@ -27,7 +31,15 @@ const DataContainer = ({ children }) => {
   );
 
   const { data: jobPostingsData, isLoading: isLoadingJobPostingsData } =
-    useJobPostings(socCodes);
+    useJobPostings(socCodes,remote,fulltime);
+
+  useEffect(() => {
+    if (!isLoadingJobPostingsData && jobPostingsData != null) {
+      setPostings(jobPostingsData);
+    }
+  } , [isLoadingJobPostingsData,jobPostingsData], );
+
+
 
   return (
     <div>

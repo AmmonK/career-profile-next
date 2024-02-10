@@ -1,12 +1,14 @@
 import React from 'react';
 import DataContainer from '@/components/dataContainer/DataContainer';
 import JobList from '@/components/jobList/JobList';
+import Filters from '@/components/filters/Filters';
 
 const MyComponent = () => {
 
   return (
     <div>
       <DataContainer>
+        <Filters/>
         <JobList/>
       </DataContainer>
       {/* testing {userInformation.personId}

@@ -17,7 +17,13 @@ export default function MyApp(props) {
     pageProps: { session, ...pageProps },
   } = props;
 
-  const [client] = useState(() => new QueryClient());
+  const [client] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5,
+      },
+    },
+  }));
 
   return (
     <SessionProvider session={session} basePath="/job-explorer/api/auth">

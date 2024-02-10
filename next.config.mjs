@@ -4,7 +4,7 @@
 import NextFederationPlugin from '@module-federation/nextjs-mf'
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   compiler: {
     removeConsole: Boolean(process.env.REMOVE_CONSOLE_LOGGING),

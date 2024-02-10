@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { AUTHENTICATED } from '@/utils/enum/session';
 import { unAuthorizedPostFetcher } from '@/utils/swr/fetcher';
 
-const useJobPostings = (socCodes) => {
+const useJobPostings = (socCodes,remote) => {
 
   const { status } = useSession();
 
@@ -21,6 +21,7 @@ const useJobPostings = (socCodes) => {
         when: 'active',
         city_name: ['Boston, MA'],
         employment_type_name: ['Full-time (> 32 hours)'],
+        ...(remote && { remote_type: [1] }),
       },
       fields: [
         'id',
@@ -32,14 +33,20 @@ const useJobPostings = (socCodes) => {
         'url',
         'score',
         'onet',
+        'remote_type_name',
+        'employment_type',
+        'employment_type_name',
       ],
       order: ['score'],
       limit: 20,
     },
   };
 
+
+
+
   return useQuery({
-    queryKey: ['jobPostings'],
+    queryKey: ['jobPostings',{...req}],
     queryFn: () => unAuthorizedPostFetcher(req),
     enabled: status === AUTHENTICATED && socCodes!= null && socCodes != undefined && socCodes?.length > 0,
   });
