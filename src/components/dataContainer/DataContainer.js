@@ -4,12 +4,9 @@ import useSocCodes from '@/hooks/rq/useSocCodes';
 import useContactInfo from '@/hooks/rq/useContactInfo';
 import useJobPostings from '@/hooks/rq/useJobPostings';
 import { useEffect } from 'react';
-import jobStore from '@/store/jobListStore';
-import storeStatus from '@/store/storeStatus';
 import { Chip } from '@mui/material';
 
 const DataContainer = ({ children }) => {
-  const { setJobStatus, setJobList } = jobStore();
 
   const { data: userInformation, isLoading: isLoadingUserInfo } = useUserInfo();
 
@@ -31,15 +28,6 @@ const DataContainer = ({ children }) => {
 
   const { data: jobPostingsData, isLoading: isLoadingJobPostingsData } =
     useJobPostings(socCodes);
-
-  useEffect(() => {
-    if (isLoadingJobPostingsData) {
-      setJobStatus(storeStatus.LOADING);
-    }
-    if (jobPostingsData) {
-      setJobList(jobPostingsData);
-    }
-  }, [jobPostingsData, isLoadingJobPostingsData, setJobList, setJobStatus]);
 
   return (
     <div>

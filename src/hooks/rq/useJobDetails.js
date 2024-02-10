@@ -8,6 +8,6 @@ export const useJobDetails = (jobId) => {
       fetcher(
         `${process.env.NEXT_PUBLIC_VENDORS_PROXY_URL}/lightcast/jpa/postings/${jobId}`
       ),
-    enabled: jobId != null && jobId != undefined,
+    enabled: jobId != null && jobId != undefined && jobId != '',
   });
 };

@@ -5,6 +5,7 @@ import { AUTHENTICATED } from '@/utils/enum/session';
 import { unAuthorizedPostFetcher } from '@/utils/swr/fetcher';
 
 const useJobPostings = (socCodes) => {
+
   const { status } = useSession();
 
   let socCodeArray = [];
@@ -40,7 +41,7 @@ const useJobPostings = (socCodes) => {
   return useQuery({
     queryKey: ['jobPostings'],
     queryFn: () => unAuthorizedPostFetcher(req),
-    enabled: status === AUTHENTICATED && socCodes?.length > 0,
+    enabled: status === AUTHENTICATED && socCodes!= null && socCodes != undefined && socCodes?.length > 0,
   });
 
 };

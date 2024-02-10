@@ -1,7 +1,5 @@
 import { React, useState } from 'react';
 
-import jobStore from '@/store/jobListStore';
-import storeStatus from '@/store/storeStatus';
 import { Stack, Card, CardContent } from '@mui/material';
 import JobDetail from '../jobDetail/JobDetail';
 import useJobPostings from '@/hooks/rq/useJobPostings';
@@ -12,7 +10,6 @@ const JobList = () => {
   const [jobDetailId, setJobDetailId] = useState('');
 
   const updateJobDetailId = (id) => {
-    console.log('updateJobDetailId', id);
     setJobDetailId(id);
   };
 
