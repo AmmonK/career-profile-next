@@ -17,32 +17,7 @@ export default function MyApp(props) {
     pageProps: { session, ...pageProps },
   } = props;
 
-  // const [client] = useState(
-  //   new QueryClient({
-  //     defaultOptions: {
-  //       queries: {
-  //         cacheTime: 1000 * 60 * 60 * 24, // 24 hours
-  //       },
-  //     },
-  //   })
-  // );
-
-  const client = new QueryClient({
-    // defaultOptions: {
-    //   queries: {
-    //     cacheTime: 1000 * 60 * 60 * 24, // 24 hours
-    //   },
-    // },
-  });
-
-  // const localStoragePersister = createSyncStoragePersister({
-  //   storage: typeof window !== 'undefined' ? window.localStorage : undefined,
-  // });
-
-  // persistQueryClient({
-  //   client,
-  //   persister: localStoragePersister,
-  // });
+  const [client] = useState(() => new QueryClient());
 
   return (
     <SessionProvider session={session} basePath="/job-explorer/api/auth">
