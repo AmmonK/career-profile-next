@@ -1,16 +1,14 @@
-
-import { useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { AUTHENTICATED } from '@/utils/enum/session';
 import { unAuthorizedPostFetcher } from '@/utils/swr/fetcher';
 
-const useJobPostings = (socCodes,remote) => {
-
+const useJobPostings = (socCodes, remote) => {
   const { status } = useSession();
 
   let socCodeArray = [];
   if (Array.isArray(socCodes)) {
-    socCodeArray = socCodes[0]?.socCodes.map((socCode) => socCode.socCode);;
+    socCodeArray = socCodes[0]?.socCodes.map((socCode) => socCode.socCode);
   }
 
   const req = {
@@ -42,15 +40,15 @@ const useJobPostings = (socCodes,remote) => {
     },
   };
 
-
-
-
   return useQuery({
-    queryKey: ['jobPostings',{...req}],
+    queryKey: ['jobPostings', { ...req }],
     queryFn: () => unAuthorizedPostFetcher(req),
-    enabled: status === AUTHENTICATED && socCodes!= null && socCodes != undefined && socCodes?.length > 0,
+    enabled:
+      status === AUTHENTICATED &&
+      socCodes != null &&
+      socCodes != undefined &&
+      socCodes?.length > 0,
   });
-
 };
 
 export default useJobPostings;
