@@ -11,6 +11,10 @@ import { Container } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
+
+
 export default function MyApp(props) {
   const {
     Component,
@@ -21,13 +25,18 @@ export default function MyApp(props) {
     defaultOptions: {
       queries: {
         staleTime: 1000 * 60 * 5,
+        cacheTime: 1000 * 60 * 60 * 24, // 24 hours
       },
     },
   }));
 
+  const persister = createSyncStoragePersister({
+    storage: typeof window !== 'undefined' ? window.localStorage : null
+  })
+
   return (
     <SessionProvider session={session} basePath="/job-explorer/api/auth">
-      <QueryClientProvider client={client}>
+      <PersistQueryClientProvider client={client} persistOptions={{ persister }}>
         <AppCacheProvider {...props}>
           <Head>
             <meta
@@ -45,7 +54,7 @@ export default function MyApp(props) {
           </ThemeProvider>
         </AppCacheProvider>
         <ReactQueryDevtools initialIsOpen={true} />
-      </QueryClientProvider>
+      </PersistQueryClientProvider>
     </SessionProvider>
   );
 }
