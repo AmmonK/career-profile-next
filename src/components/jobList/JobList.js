@@ -12,9 +12,6 @@ const JobList = () => {
     setJobDetailId(id);
   };
 
-  console.log('from job list', jobList);
-  console.log(typeof jobList);
-
   return (
     <Stack direction="row" spacing={2}>
       <div>

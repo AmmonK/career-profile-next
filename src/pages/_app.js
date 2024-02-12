@@ -31,7 +31,7 @@ export default function MyApp(props) {
   }));
 
   const persister = createSyncStoragePersister({
-    storage: typeof window !== 'undefined' ? window.localStorage : null
+    storage: typeof window !== 'undefined' ? window.sessionStorage : null
   })
 
   return (

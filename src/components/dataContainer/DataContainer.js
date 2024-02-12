@@ -9,6 +9,7 @@ import filterStore from '@/stores/filterStore';
 import jobPostingStore from '@/stores/jobPostingStore';
 import { useEffect } from 'react';
 import queryStatus from '@/utils/enum/queryStatus';
+import QueryModifications from '../actions/queryModifications';
 
 const DataContainer = ({ children }) => {
   const { remote, fulltime } = filterStore((state) => state);
@@ -68,6 +69,7 @@ const DataContainer = ({ children }) => {
         <Chip label="Jobs" color={getColor(jobPostingStatus)} />
         <Chip label="CLR" color={getColor(clrStatus)} />
       </div>
+      <QueryModifications/>
       {children}
     </div>
   );
