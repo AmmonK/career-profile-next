@@ -1,6 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
 import QueryString from 'qs';
-import axios from 'axios';
 import CryptoJS from 'crypto-js';
 /**
  * This function retrieves a valid application access token and returns the encrypted version.
@@ -16,21 +15,21 @@ export default async () => {
     grant_type: 'client_credentials',
   });
   const config = {
-    method: 'post',
-    url: process.env.COGNITO_TOKEN_URI,
+    method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: authorizationHeader,
       Cookie: 'XSRF-TOKEN=7c80f503-0907-4e33-8d7e-41335f169505',
     },
-    data,
+    body: data,
   };
 
-  const tokenResponse = await axios(config);
-  if (tokenResponse.status === 200) {
+  const response = await fetch(process.env.COGNITO_TOKEN_URI, config);
+  if (response.ok) {
+    const tokenResponse = await response.json();
     const token = {
-      accessToken: tokenResponse.data.access_token,
-      expiration: tokenResponse.data.expires_in + Date.now(),
+      accessToken: tokenResponse.access_token,
+      expiration: tokenResponse.expires_in + Date.now(),
     };
     const encryptedToken = CryptoJS.AES.encrypt(
       JSON.stringify(token),

@@ -33,8 +33,6 @@ const DataContainer = ({ children }) => {
       : null
   );
 
-  console.log(primaryProgramInfo)
-
   const { data: clrData, status: clrStatus } = useClr();
 
   const { data: jobPostingsData, status: jobPostingStatus } = useJobPostings(

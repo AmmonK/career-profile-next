@@ -31,7 +31,6 @@ function Filters() {
 
   const handleJobLevelChange = (e) => {
     setJobLevel(e.target.value);
-    console.log;
   };
 
   return (

@@ -7,12 +7,5 @@ export default withAuth(
     pages: {
       signIn: '/auth/signin',
     },
-    // callbacks: {
-    //   authorized: async ({ token }) => {
-    //     console.log('authorized');
-    //     console.log(token);
-    //     return Promise.resolve(token);
-    //   },
-    // }
   }
 );
