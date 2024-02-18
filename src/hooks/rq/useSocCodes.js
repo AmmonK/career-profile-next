@@ -10,9 +10,9 @@ const useSocCodesByProgramCode = (socCode) => {
   const proxyUrl = (url) => `${process.env.NEXT_PUBLIC_BASE_PATH}${url}`;
 
   return useQuery({
-    queryKey: ['socCodes'],
+    queryKey: ['socCodes', socCode],
     queryFn: () =>
-      fetch(proxyUrl(formatUrl(socCode)).then((res) => res.json())),
+      fetch(proxyUrl(formatUrl(socCode))).then((res) => res.json()),
     enabled: status === AUTHENTICATED && socCode != null,
   });
 };

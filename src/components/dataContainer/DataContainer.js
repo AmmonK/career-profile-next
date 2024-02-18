@@ -17,8 +17,6 @@ const DataContainer = ({ children }) => {
   const { setPostings } = jobPostingStore((state) => state);
 
   const { data: userInformation, status: userInfoStatus } = useUserInfo();
-  
-
 
   const { data: primaryProgramInfo, status: primaryProgramStatus } =
     usePrimaryProgram();
@@ -34,6 +32,8 @@ const DataContainer = ({ children }) => {
         )[0]
       : null
   );
+
+  console.log(primaryProgramInfo)
 
   const { data: clrData, status: clrStatus } = useClr();
 
@@ -78,7 +78,7 @@ const DataContainer = ({ children }) => {
         <Chip label="CLR" color={getColor(clrStatus)} />
         <Chip label="Skills Data" color={getColor(skillsStatus)} />
       </div>
-      <QueryModifications/>
+      <QueryModifications />
       {children}
     </div>
   );
