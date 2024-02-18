@@ -1,31 +1,19 @@
-import { useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { AUTHENTICATED } from '@/utils/enum/session';
-import { proxyFetcher } from '@/utils/swr/fetcher';
 
-
-export const formatUrl = (code) =>
-  `/api/proxy/programSocCodes?programCode=${code}`;
-
-const useSocCodesByProgramCode = (socCode,) => {
+const useSocCodesByProgramCode = (socCode) => {
   const { status } = useSession();
 
-  // const { data, error } = useSWRImmutable(
-  //   status === AUTHENTICATED && socCode ? formatUrl(socCode) : null,
-  //   fetcher,
-  //   { ...options }
-  // );
+  const formatUrl = (code) => `/api/proxy/programSocCodes?programCode=${code}`;
 
-  // return {
-  //   socCodes: data || {},
-  //   isLoading: !data && !error,
-  //   isError: error,
-  // };
+  const proxyUrl = (url) => `${process.env.NEXT_PUBLIC_BASE_PATH}${url}`;
 
   return useQuery({
     queryKey: ['socCodes'],
-    queryFn: () => proxyFetcher(formatUrl(socCode)),
-    enabled: status === AUTHENTICATED && socCode != null 
+    queryFn: () =>
+      fetch(proxyUrl(formatUrl(socCode)).then((res) => res.json())),
+    enabled: status === AUTHENTICATED && socCode != null,
   });
 };
 

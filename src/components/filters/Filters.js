@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
-import { Switch, FormControlLabel } from '@mui/material';
+import {
+  Switch,
+  FormControlLabel,
+  InputLabel,
+  Select,
+  FormControl,
+  MenuItem,
+} from '@mui/material';
 import filterStore from '@/stores/filterStore';
+import { jobLevels } from '@/utils/enum/jobLevels';
 
 function Filters() {
   const [isRemote, setIsRemote] = useState(false);
+  const [isSkills, setIsSkills] = useState(false);
   const [isFulltime, setIsFulltime] = useState(true);
 
-  const {remote, setRemote} = filterStore((state) => state);
-  const {fulltime, setFulltime} = filterStore((state) => state);
+  const { remote, setRemote, jobLevel, setJobLevel, skills, setSkills } = filterStore(
+    (state) => state
+  );
 
   const handleRemoteToggle = () => {
     setRemote(!isRemote);
     setIsRemote(!isRemote);
   };
 
-  const handleFulltimeToggle = () => {
-    setFulltime(!isFulltime);
-    setIsFulltime(!isFulltime);
-  }
+  const handleSkillToggle = () => {
+    setSkills(!isSkills);
+    setIsSkills(!isSkills);
+  };
+
+  const handleJobLevelChange = (e) => {
+    setJobLevel(e.target.value);
+    console.log;
+  };
 
   return (
     <div>
@@ -26,9 +41,33 @@ function Filters() {
         label="Remote"
       />
       <FormControlLabel
-        control={<Switch checked={isFulltime} onChange={handleFulltimeToggle} />}
-        label="Fulltime"
-      />  
+        control={<Switch checked={isSkills} onChange={handleSkillToggle} />}
+        label="Skills"
+      />
+
+      <FormControl fullWidth>
+        <InputLabel id="experience-level-select">Experience level</InputLabel>
+        <Select
+          MenuProps={{ disablePortal: true }} // for modal backdrop styling
+          labelId="experience-level-select"
+          id="experience-level-select"
+          value={jobLevel ?? 'All Levels'}
+          label="Experience level"
+          onChange={handleJobLevelChange}
+        >
+          {Object.keys(jobLevels).map((key) => {
+            return (
+              <MenuItem
+                key={key}
+                data-test={`job-explorer_${key}`}
+                value={jobLevels[key]}
+              >
+                {jobLevels[key]}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
     </div>
   );
 }

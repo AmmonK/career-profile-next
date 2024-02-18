@@ -1,8 +1,8 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Stack, Card, CardContent, Chip } from '@mui/material';
 import JobDetail from '../jobDetail/JobDetail';
-// import useJobPostings from '@/hooks/rq/useJobPostings';
 import jobPostingStore from '@/stores/jobPostingStore';
+import DataChips from '../dataChips/DataChips';
 
 const JobList = () => {
   const [jobDetailId, setJobDetailId] = useState('');
@@ -12,22 +12,36 @@ const JobList = () => {
     setJobDetailId(id);
   };
 
+  useEffect(() => {
+    if (jobList?.data?.postings?.length > 0) {
+      setJobDetailId(jobList?.data?.postings[0].id);
+    }
+  }
+  , [jobList]);
+
   return (
     <Stack direction="row" spacing={2}>
       <div>
-        <h1>job info</h1>
+        <h1>Postings</h1>
         <Stack direction="column" spacing={1}>
           {jobList?.data?.postings?.length > 0 &&
             jobList?.data?.postings?.map((jobPosting) => {
               return (
-                <Card key={jobPosting.id}>
+                <Card
+                  onClick={() => updateJobDetailId(jobPosting.id)}
+                  key={jobPosting.id}
+                  sx={{
+                    borderLeft: 3,
+                    borderLeftColor:
+                      jobPosting.id === jobDetailId ? 'red' : 'white',
+                    borderRight: 3,
+                    borderRightColor:
+                      jobPosting.id === jobDetailId ? 'red' : 'white',
+                  }}
+                >
                   <CardContent>
-                    <div onClick={() => updateJobDetailId(jobPosting.id)}>
-                      {jobPosting.title_raw}{' '}
-                      <div>
-                        <Chip label={jobPosting.remote_type_name} />
-                        <Chip label={jobPosting.employment_type==1?'fulltime':'parttime'} />
-                      </div>
+                    <div>
+                      {jobPosting.title_raw} <DataChips posting={jobPosting} />
                     </div>
                   </CardContent>
                 </Card>

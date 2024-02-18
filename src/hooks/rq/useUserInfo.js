@@ -1,18 +1,18 @@
-import { useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { AUTHENTICATED } from '@/utils/enum/session';
-
-import { proxyFetcher } from '@/utils/swr/fetcher';
 
 const useUserInfo = () => {
   const { status } = useSession();
 
+  const proxyUrl = (url) => `${process.env.NEXT_PUBLIC_BASE_PATH}${url}`;
+
   return useQuery({
     queryKey: ['userInfo'],
-    queryFn: () => proxyFetcher('/api/proxy/persons'),
-    enabled: status === AUTHENTICATED
+    queryFn: () =>
+      fetch(proxyUrl('/api/proxy/persons')).then((res) => res.json()),
+    enabled: status === AUTHENTICATED,
   });
-
 };
 
 export default useUserInfo;

@@ -4,18 +4,21 @@ import useSocCodes from '@/hooks/rq/useSocCodes';
 import useContactInfo from '@/hooks/rq/useContactInfo';
 import useJobPostings from '@/hooks/rq/useJobPostings';
 import useClr from '@/hooks/rq/useClr';
+import useSkills from '@/hooks/rq/useSkills';
 import { Chip } from '@mui/material';
 import filterStore from '@/stores/filterStore';
 import jobPostingStore from '@/stores/jobPostingStore';
 import { useEffect } from 'react';
 import queryStatus from '@/utils/enum/queryStatus';
-import QueryModifications from '../actions/queryModifications';
+import QueryModifications from '../actions/QueryModifications';
 
 const DataContainer = ({ children }) => {
-  const { remote, fulltime } = filterStore((state) => state);
+  const { remote, jobLevel, skills } = filterStore((state) => state);
   const { setPostings } = jobPostingStore((state) => state);
 
   const { data: userInformation, status: userInfoStatus } = useUserInfo();
+  
+
 
   const { data: primaryProgramInfo, status: primaryProgramStatus } =
     usePrimaryProgram();
@@ -37,8 +40,12 @@ const DataContainer = ({ children }) => {
   const { data: jobPostingsData, status: jobPostingStatus } = useJobPostings(
     socCodes,
     remote,
-    fulltime
+    jobLevel,
+    clrData,
+    skills
   );
+
+  const { data: skillsData, status: skillsStatus } = useSkills(clrData);
 
   useEffect(() => {
     if (jobPostingStatus == queryStatus.SUCCESS && jobPostingsData != null) {
@@ -62,12 +69,14 @@ const DataContainer = ({ children }) => {
   return (
     <div>
       <div>
+        {jobLevel}
         <Chip label="User Info" color={getColor(userInfoStatus)} />
         <Chip label="Contact Info" color={getColor(contactInfoStatus)} />
         <Chip label="Primary Program" color={getColor(primaryProgramStatus)} />
         <Chip label="SOC Codes" color={getColor(socCodesStatus)} />
         <Chip label="Jobs" color={getColor(jobPostingStatus)} />
         <Chip label="CLR" color={getColor(clrStatus)} />
+        <Chip label="Skills Data" color={getColor(skillsStatus)} />
       </div>
       <QueryModifications/>
       {children}
