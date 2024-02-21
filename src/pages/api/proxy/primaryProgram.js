@@ -21,7 +21,14 @@ const programHandler = async (req, res) => {
       Authorization: `Bearer ${token.accessToken}`,
     },
   });
-
+  
+  if (programRequest.status !== 200) {
+    // log error
+    console.log('error programRequest.status', programRequest.status);
+    return res.status(500).end();
+    // return res.status(programRequest.status).end();
+  }
+  console.log('success programRequest.status', programRequest.status);
   return res.status(programRequest.status).json(await programRequest.json());
 };
 

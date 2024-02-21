@@ -21,6 +21,11 @@ const clrHandler = async (req, res) => {
     },
   });
 
+  if (clrRequest.status !== 200) {
+    // log error
+    return res.status(clrRequest.status).end();
+  }
+
   return res.status(clrRequest.status).json(await clrRequest.json());
 };
 

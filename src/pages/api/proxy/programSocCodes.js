@@ -23,6 +23,13 @@ const socHandler = async (req, res) => {
     },
   });
 
+  if (socRequest.status !== 200) {
+    // log error
+    console.log('error socRequest.status', socRequest.status);
+    return res.status(500).end();
+    // return res.status(socRequest.status).end();
+  }
+  console.log('success socRequest.status', socRequest.status);
   return res.status(socRequest.status).json(await socRequest.json());
 };
 

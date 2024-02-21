@@ -22,6 +22,11 @@ const personHandler = async (req, res) => {
     },
   });
 
+  if (personRequest.status !== 200) {
+    // log error
+    return res.status(personRequest.status).end();
+  }
+
   return res.status(personRequest.status).json(await personRequest.json());
 };
 

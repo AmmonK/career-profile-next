@@ -21,6 +21,11 @@ const contactInfoHandler = async (req, res) => {
     },
   });
 
+  if (contactRequest.status !== 200) {
+    // log error
+    return res.status(contactRequest.status).end();
+  }
+
   return res.status(contactRequest.status).json(await contactRequest.json());
 };
 

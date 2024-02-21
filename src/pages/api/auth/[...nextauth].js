@@ -38,8 +38,8 @@ async function refreshAccessToken(token) {
   };
 }
 
-const nextAuthOptions = () => ({
-  debug: process.env.NEXTAUTH_DEBUG,
+const nextAuthOptions = {
+  debug: false, //process.env.NEXTAUTH_DEBUG,
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CognitoProvider({
@@ -72,17 +72,17 @@ const nextAuthOptions = () => ({
     jwt: true,
     maxAge: (process.env.COGNITO_MAX_TOKEN_AGE_SECONDS || 3000) * 1000,
   },
-  logger: {
-    error(code, metadata) {
-      console.log('Next Auth Error: ', code, metadata);
-    },
-    warn(code) {
-      console.log('Next Auth Warning: ', code);
-    },
-    debug(code, metadata) {
-      console.log('Next Auth Debug: ', code, metadata);
-    },
-  },
+  // logger: {
+  //   error(code, metadata) {
+  //     console.log('Next Auth Error: ', code, metadata);
+  //   },
+  //   warn(code) {
+  //     console.log('Next Auth Warning: ', code);
+  //   },
+  //   debug(code, metadata) {
+  //     console.log('Next Auth Debug: ', code, metadata);
+  //   },
+  // },
   callbacks: {
     async session({ session, token }) {
       // const lt = await lightcastToken();
@@ -175,9 +175,10 @@ const nextAuthOptions = () => ({
     //   },
     // },
   },
-});
+};
 
-// Abbreviated to shorten line
-const NextAuthWrapper = (req, res) => NextAuth(req, res, nextAuthOptions(res));
+const authHandler = NextAuth(nextAuthOptions);
 
-export default NextAuthWrapper;
+export default async function handler(...params) {
+  await authHandler(...params);
+}
