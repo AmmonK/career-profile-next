@@ -24,7 +24,7 @@ export default function MyApp(props) {
   const [client] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 1000 * 60 * 5, // 5 minutes in milliseconds
+        staleTime: 1000 * 60 * 60 * 24, // 5 minutes in milliseconds
         cacheTime: 1000 * 60 * 60 * 24, // 24 hours in milliseconds
       },
     },

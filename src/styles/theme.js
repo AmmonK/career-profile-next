@@ -24,6 +24,13 @@ const theme = createTheme({
         disableRipple: true, // No more ripple, on the whole application 💣!
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
+    },
     MuiBackdrop: {
       styleOverrides: {
         root: {
@@ -136,7 +143,8 @@ const theme = createTheme({
     // this along with giving html font-size 62.5% in index.css allows
     // us to have 1rem == 10px for easier calculation
     // for example, 24px will be equal to 2.4rem, see: https://material-ui.com/customization/typography/#font-size
-    htmlFontSize: 10,
+    htmlFontSize: 14,
+    fontSize: 14,
     fontFamily: 'Roboto, sans-serif, IBM Plex Serif',
     h1: {
       fontSize: '2.3rem',

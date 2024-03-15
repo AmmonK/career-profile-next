@@ -5,6 +5,9 @@ import useContactInfo from '@/hooks/rq/useContactInfo';
 import useJobPostings from '@/hooks/rq/useJobPostings';
 import useClr from '@/hooks/rq/useClr';
 import useSkills from '@/hooks/rq/useSkills';
+import useAllSkills from '@/hooks/rq/useAllSkills';
+
+
 import { Chip } from '@mui/material';
 import filterStore from '@/stores/filterStore';
 import jobPostingStore from '@/stores/jobPostingStore';
@@ -13,6 +16,9 @@ import queryStatus from '@/utils/enum/queryStatus';
 import QueryModifications from '../actions/QueryModifications';
 
 const DataContainer = ({ children }) => {
+
+  const { data: allSkills, status: allSkillsStatus } = useAllSkills();
+
   const { remote, jobLevel, skills } = filterStore((state) => state);
   const { setPostings } = jobPostingStore((state) => state);
 
@@ -75,6 +81,7 @@ const DataContainer = ({ children }) => {
         <Chip label="Jobs" color={getColor(jobPostingStatus)} />
         <Chip label="CLR" color={getColor(clrStatus)} />
         <Chip label="Skills Data" color={getColor(skillsStatus)} />
+        <Chip label="All Skills" color={getColor(allSkillsStatus)} />
       </div>
       <QueryModifications />
       {children}
