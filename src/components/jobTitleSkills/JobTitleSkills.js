@@ -6,20 +6,17 @@ import AddIcon from '@mui/icons-material/Add';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import SquareFootIcon from '@mui/icons-material/SquareFoot';
 import BatteryUnknownIcon from '@mui/icons-material/BatteryUnknown';
+import findClrMatch from '@/utils/skills/findClrMatch';
+import useClr from '@/hooks/rq/useClr';
 
 const JobTitleSkills = ({ title }) => {
   const { data, status } = useJobTitleSkills(title);
   const { data: allSkills, status: allSkillsStatus } = useAllSkills();
+  const { data: clrData, status: clrStatus } = useClr();
 
   const findSkillById = (id) => {
     return allSkills?.find((skill) => skill.id === id);
   };
-
-  const size = new TextEncoder().encode(JSON.stringify(allSkills)).length
-  const kiloBytes = size / 1024;
-  const megaBytes = kiloBytes / 1024;
-  console.log(kiloBytes)
-  
 
   const skillTypeIndicator = (skill) =>  {
     switch (skill.skillType) {
@@ -47,6 +44,7 @@ const JobTitleSkills = ({ title }) => {
         {data &&
           data?.data?.ranking.buckets.map((skill, i) => (
             <Chip
+              color={findClrMatch(skill, clrData) ? "success" : "default"}
               icon={skillTypeIndicator(findSkillById(skill.name))}
               key={i}
               label={findSkillById(skill.name).name + ": " + findSkillById(skill.name).skillType}
