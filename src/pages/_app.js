@@ -30,6 +30,7 @@ export default function MyApp(props) {
     },
   }));
 
+  // https://tanstack.com/query/v4/docs/framework/react/plugins/createSyncStoragePersister
   const persister = createSyncStoragePersister({
     storage: typeof window !== 'undefined' ? window.sessionStorage : null,
     serialize: (data) => compress(JSON.stringify(data)),
