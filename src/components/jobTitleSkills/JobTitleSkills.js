@@ -12,11 +12,17 @@ const JobTitleSkills = ({ title }) => {
   const { data: allSkills, status: allSkillsStatus } = useAllSkills();
 
   const findSkillById = (id) => {
-    return allSkills?.data?.find((skill) => skill.id === id);
+    return allSkills?.find((skill) => skill.id === id);
   };
 
+  const size = new TextEncoder().encode(JSON.stringify(allSkills)).length
+  const kiloBytes = size / 1024;
+  const megaBytes = kiloBytes / 1024;
+  console.log(kiloBytes)
+  
+
   const skillTypeIndicator = (skill) =>  {
-    switch (skill.type.name) {
+    switch (skill.skillType) {
       case 'Specialized Skill':
         return <WorkspacePremiumIcon/>;
       case 'Common Skill':
@@ -43,7 +49,7 @@ const JobTitleSkills = ({ title }) => {
             <Chip
               icon={skillTypeIndicator(findSkillById(skill.name))}
               key={i}
-              label={findSkillById(skill.name).name + ": " + findSkillById(skill.name).type.name}
+              label={findSkillById(skill.name).name + ": " + findSkillById(skill.name).skillType}
               variant="outlined"
             />
           ))}

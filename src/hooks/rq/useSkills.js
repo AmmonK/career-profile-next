@@ -1,6 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
+import useClr from '@/hooks/rq/useClr';
 
-const useSkills = (clrData) => {
+const useSkills = () => {
+
+  const { data: clrData} = useClr();
+  
   const filteredData = clrData?.filter((item) =>
     item.achievement.id.startsWith('EMSI:')
   );
@@ -23,7 +27,7 @@ const useSkills = (clrData) => {
   return useQuery({
     queryKey: ['skills', req],
     queryFn: () => fetch(url, req).then((res) => res.json()),
-    enabled: clrData != null && Array.isArray(clrData) && clrData.length > 0,
+    enabled: clrData != undefined && clrData != null && Array.isArray(clrData) && clrData.length > 0,
   });
 };
 

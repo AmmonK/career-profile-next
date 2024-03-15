@@ -5,9 +5,8 @@ import SkillFinder from '@/components/skillFinder/SkillFinder';
 const MyComponent = () => {
   return (
     <div>
-      <DataContainer>
-        <SkillFinder />
-      </DataContainer>
+      <DataContainer />
+      <SkillFinder />      
     </div>
   );
 };

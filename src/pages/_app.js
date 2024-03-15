@@ -13,7 +13,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
-
+import { compress, decompress } from 'lz-string'
 
 export default function MyApp(props) {
   const {
@@ -24,14 +24,16 @@ export default function MyApp(props) {
   const [client] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 1000 * 60 * 60 * 24, // 5 minutes in milliseconds
+        staleTime: 1000 * 60 * 60 * 24, // 24 hours in milliseconds
         cacheTime: 1000 * 60 * 60 * 24, // 24 hours in milliseconds
       },
     },
   }));
 
   const persister = createSyncStoragePersister({
-    storage: typeof window !== 'undefined' ? window.sessionStorage : null
+    storage: typeof window !== 'undefined' ? window.sessionStorage : null,
+    serialize: (data) => compress(JSON.stringify(data)),
+    deserialize: (data) => JSON.parse(decompress(data)),
   })
 
   return (
