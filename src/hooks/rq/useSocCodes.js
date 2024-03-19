@@ -18,8 +18,6 @@ const useSocCodesByProgramCode = () => {
         )[0]
       : null;
 
-      console.log('socCode', socCode);
-
   const formatUrl = (code) => `/api/proxy/programSocCodes?programCode=${code}`;
 
   const proxyUrl = (url) => `${process.env.NEXT_PUBLIC_BASE_PATH}${url}`;
