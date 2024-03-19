@@ -1,13 +1,15 @@
 import React from 'react';
-import DataContainer from '@/components/dataContainer/DataContainer';
-import SkillFinder from '@/components/skillFinder/SkillFinder';
+
+import DataStatus from '@/components/dataStatus/DataStatus';
+import CareerProfile from '@/components/careerProfile/CareerProfile';
+
+
 
 const MyComponent = () => {
   return (
     <div>
-      <DataContainer>
-        <SkillFinder />
-      </DataContainer>
+      <DataStatus />
+      <CareerProfile/>
     </div>
   );
 };
