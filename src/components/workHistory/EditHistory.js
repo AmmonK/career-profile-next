@@ -14,7 +14,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
 
-const EditHistory = ({item, addMethod}) => {  
+const EditHistory = ({item, addMethod, cancelHandler}) => {  
 
   const [workItem, setWorkItem] = useState(item);
 
@@ -39,7 +39,7 @@ const EditHistory = ({item, addMethod}) => {
               </FormGroup>
             </Stack>
             <Stack direction="row" justifyContent="flex-end" spacing={2}>
-              <Button variant="outlined" color="primary">
+              <Button variant="outlined" color="primary" onClick={() => cancelHandler()}>
                 Cancel
               </Button>
               <Button variant="contained" color="primary" onClick={() => addMethod(workItem)}>

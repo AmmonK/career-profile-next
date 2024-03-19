@@ -30,6 +30,10 @@ const WorkHistory = () => {
     });
   };
 
+  const cancelHandler = () => {
+    setEditHistory(null);
+  }
+
   const editHandler = (item) => {
     setEditHistory(item);
   };
@@ -72,7 +76,7 @@ const WorkHistory = () => {
         </>
       )}
 
-      {editHistory && <EditHistory item={editHistory} addMethod={addMethod} />}
+      {editHistory && <EditHistory item={editHistory} addMethod={addMethod} cancelHandler={cancelHandler} />}
 
     </>
   );
