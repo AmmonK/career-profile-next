@@ -31,7 +31,7 @@ const WorkHistory = () => {
   };
 
   const cancelHandler = () => {
-    setEditHistory(null);
+    setEditHistory({});
   };
 
   const editHandler = (item) => {

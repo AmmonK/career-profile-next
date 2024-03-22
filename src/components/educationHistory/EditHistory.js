@@ -7,6 +7,7 @@ import {
   FormGroup,
   FormControlLabel,
   Stack,
+  Typography
 } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
@@ -21,8 +22,8 @@ const EditHistory = ({ item, addMethod, cancelHandler }) => {
     <>
       <Card>
         <CardContent>
-          <h5>Edit education history</h5>
-          <Stack direction="column" spacing={2}>
+          <Stack direction="column" spacing={3}>
+          <Typography variant="h5">Edit education history</Typography>
             <TextField
               label="Institution"
               variant="outlined"
