@@ -25,12 +25,12 @@ const HistoryList = ({ list, editHandler, deleteHandler }) => {
               <Stack direction="row" justifyContent="space-between">
                 <Stack direction="column" spacing={1}>
                   <h4>
-                    {item.jobTitle}
+                    {item.degree}
                     {item.current && (
                       <Chip label="current" color="success" size="small" />
                     )}
                   </h4>
-                  <Typography component={'p'}>{item.employer}</Typography>
+                  <Typography component={'p'}>{item.institution}</Typography>
                   <Typography component={'p'}>
                     {dayjs(item.start).format('MM/YYYY')} -{' '}
                     {item.current

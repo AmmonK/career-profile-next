@@ -4,7 +4,7 @@ import HistoryList from './HistoryList';
 import EditHistory from './EditHistory';
 import { Button, Stack, Typography } from '@mui/material';
 
-const WorkHistory = () => {
+const EducationHistory = () => {
   const [history, setHistory] = useState([]);
   const [editHistory, setEditHistory] = useState(null);
 
@@ -22,8 +22,8 @@ const WorkHistory = () => {
   const addHandler = () => {
     setEditHistory({
       id: generate_uuidv4(),
-      jobTitle: 'Software Engineer',
-      employer: 'University of Phoenix',
+      institution: 'University of Phoenix',
+      degree: 'Bachelors of Science in Information Technology',
       start: new Date(),
       end: new Date(),
       current: true,
@@ -54,34 +54,32 @@ const WorkHistory = () => {
   return (
     <>
       <Typography variant="h4" gutterBottom>
-        Work History
+        Education History
       </Typography>
       {!editHistory && (
         <>
-          <Stack direction="column" spacing={4} sx={{ marginTop: '4rem' }}>
-            {history.length === 0 ? (
-              <NoHistory addHandler={addHandler} />
-            ) : (
-              <HistoryList
-                list={history}
-                editHandler={editHandler}
-                deleteHandler={deleteHandler}
-              />
-            )}
+          {history.length === 0 ? (
+            <NoHistory addHandler={addHandler} />
+          ) : (
+            <HistoryList
+              list={history}
+              editHandler={editHandler}
+              deleteHandler={deleteHandler}
+            />
+          )}
 
-            <Stack
-              direction="row"
-              spacing={2}
-              justifyContent={history.length > 0 ? 'flex-start' : 'center'}
+          <Stack
+            direction="row"
+            spacing={2}
+            justifyContent={history.length > 0 ? 'flex-start' : 'center'}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => addHandler()}
             >
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => addHandler()}
-              >
-                Add your work history
-              </Button>
-            </Stack>
+              Add your education history
+            </Button>
           </Stack>
         </>
       )}
@@ -97,4 +95,4 @@ const WorkHistory = () => {
   );
 };
 
-export default WorkHistory;
+export default EducationHistory;

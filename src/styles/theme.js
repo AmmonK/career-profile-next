@@ -2,25 +2,15 @@ import { createTheme } from '@mui/material';
 
 const calcHeaderLineHeight = (fontSize) => `${fontSize * 1.2}rem`;
 
+const spacing =  (factor) => `${1 * factor}rem`;
+
 // reference this palette in your component within makeStyles with theme.palette
 const theme = createTheme({
+    // use a 10px (1rem) grid
   components: {
-    MuiAutocomplete: {
-      styleOverrides: {
-        listbox: {
-          '& .MuiAutocomplete-option[aria-selected="true"]': {
-            backgroundColor: '#E3E6E7',
-          },
-          '& .MuiAutocomplete-option[aria-selected="true"].Mui-focused': {
-            backgroundColor: '#E3E6E7',
-          },
-        },
-      },
-    },
-    // Name of the component ⚛️
     MuiButtonBase: {
       defaultProps: {
-        // The props to apply
+        // The props to change the default for.
         disableRipple: true, // No more ripple, on the whole application 💣!
       },
     },
@@ -28,19 +18,13 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
+          borderRadius: spacing(3),
+          minWidth: spacing(15),
         },
       },
     },
-    MuiBackdrop: {
-      styleOverrides: {
-        root: {
-          backgroundColor: 'rgba(0, 24, 35, 0.4)',
-        },
-      },
     },
-  },
   breakpoints: {
-    // breakpoints aligned with .edu/uopcommon no more xs breakpoint. sm is 0-640
     values: {
       xs: 0,
       sm: 640,
@@ -57,7 +41,7 @@ const theme = createTheme({
     background: {
       paper: '#FFF',
       dark: '#666666',
-      default: '#FFF',
+      default: '#F2F3F3',
     },
     primary: {
       light: '#EA695B',
@@ -76,7 +60,7 @@ const theme = createTheme({
       contrastText: '#FFF',
     },
     success: {
-      main: '#007758',
+      main: '#007D21',
       contrastText: '#FFF',
     },
     text: {
@@ -143,39 +127,27 @@ const theme = createTheme({
     // this along with giving html font-size 62.5% in index.css allows
     // us to have 1rem == 10px for easier calculation
     // for example, 24px will be equal to 2.4rem, see: https://material-ui.com/customization/typography/#font-size
-    htmlFontSize: 14,
-    fontSize: 14,
-    fontFamily: 'Roboto, sans-serif, IBM Plex Serif',
+    htmlFontSize: 10,
+    fontFamily: 'Roboto, sans-serif',
     h1: {
-      fontSize: '2.3rem',
-      fontFamily: 'Roboto',
-      lineHeight: '4rem',
-      fontWeight: '500',
+      fontWeight: '700',
     },
     h2: {
-      fontSize: '2.4rem',
-      fontFamily: 'Roboto',
-      fontWeight: '100',
+      fontWeight: '700',
     },
     h3: {
-      fontSize: '1.6rem',
-      fontFamily: 'Roboto',
       fontWeight: '400',
     },
     h4: {
-      fontSize: '1.6rem',
-      fontFamily: 'Roboto',
-      fontWeight: '400',
+      fontWeight: '700',
     },
     h5: {
-      fontSize: '1.2rem',
-      fontFamily: 'Roboto',
-      fontWeight: '300',
+      fontSize: '2.4rem',
+      fontWeight: '500',
       lineHeight: calcHeaderLineHeight(2.4),
     },
   },
-  // use a 10px (1rem) grid
-  spacing: (factor) => `${1 * factor}rem`,
+
 });
 
 export default theme;

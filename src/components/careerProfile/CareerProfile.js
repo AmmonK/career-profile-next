@@ -1,20 +1,23 @@
-import { Grid } from '@mui/material';
-import React from 'react';
+import { Grid, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import ProfileNavigation from '../profileNavigation/ProfileNavigation';
 import WorkHistory from '../workHistory/WorkHistory';
+import EducationHistory from '../educationHistory/EducationHistory';
 
-const CareerProfile = () => {
+const CareerProfile = ({ page }) => {
   return (
     <>
       <Grid container>
         <Grid item xs={3}>
-          <h1>nav</h1>
-          <ProfileNavigation/>
+          <ProfileNavigation currentPage={page} />
         </Grid>
         <Grid item xs={1} />
         <Grid item xs={8}>
-          <h1>content</h1>
-          <WorkHistory/>
+          <Typography gutterBottom sx={{ color: '#00638C' }}>
+            Career Profile
+          </Typography>
+          {page === 'work-history' && <WorkHistory />}
+          {page === 'education-history' && <EducationHistory />}
         </Grid>
       </Grid>
     </>

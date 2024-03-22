@@ -21,22 +21,22 @@ const EditHistory = ({ item, addMethod, cancelHandler }) => {
     <>
       <Card>
         <CardContent>
-          <h5>Edit work history</h5>
+          <h5>Edit education history</h5>
           <Stack direction="column" spacing={2}>
             <TextField
-              label="Job Title"
+              label="Institution"
               variant="outlined"
-              value={workItem.jobTitle}
+              value={workItem.institution}
               onChange={(e) =>
-                setWorkItem({ ...workItem, jobTitle: e.target.value })
+                setWorkItem({ ...workItem, institution: e.target.value })
               }
             />
             <TextField
-              label="Employer"
+              label="Degree"
               variant="outlined"
-              value={workItem.employer}
+              value={workItem.degree}
               onChange={(e) =>
-                setWorkItem({ ...workItem, employer: e.target.value })
+                setWorkItem({ ...workItem, degree: e.target.value })
               }
             />
             <Stack direction="row" spacing={2}>
@@ -64,7 +64,7 @@ const EditHistory = ({ item, addMethod, cancelHandler }) => {
                       }
                     />
                   }
-                  label="I currently work here"
+                  label="I'm currently attending"
                 />
               </FormGroup>
             </Stack>

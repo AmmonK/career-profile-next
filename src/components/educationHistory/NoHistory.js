@@ -6,7 +6,7 @@ const NoHistory = ({ addHandler }) => {
     <>
       <Stack direction="row" spacing={2} justifyContent="center">
         <Typography component={'p'}>
-          We don't have any work history for you yet
+          We don't have any education history for you yet
         </Typography>
       </Stack>
     </>
