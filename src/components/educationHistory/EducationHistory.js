@@ -9,6 +9,66 @@ const EducationHistory = () => {
   const [history, setHistory] = useState([]);
   const [editHistory, setEditHistory] = useState(null);
 
+  const nonsenseDegrees = [
+    "Bachelor of Time Travel",
+    "Master of Unicorn Management",
+    "Doctorate in Underwater Basket Weaving",
+    "Associate in Alien Communication",
+    "Bachelor of Invisible Arts",
+    "Master of Advanced Pillow Fighting",
+    "Doctorate in Chocolate Studies",
+    "Associate in the Art of Napping",
+    "Bachelor of Quantum Entanglement",
+    "Master in Dragonology",
+    "Doctorate in Advanced Procrastination",
+    "Associate in Space Tourism",
+    "Bachelor of Wizardry and Witchcraft",
+    "Master of Parallel Universe Negotiations",
+    "Doctorate in Vampire Psychology",
+    "Associate in Hobbit Hole Design",
+    "Bachelor in the Study of Mystical Creatures",
+    "Master in the Dynamics of Santa’s Sleigh",
+    "Doctorate in Superhero Ethics",
+    "Associate in Pirate Ship Engineering",
+    "Bachelor of Ghost Communication",
+    "Master in Zombie Survival Strategies",
+    "Doctorate in Time Loop Solutions",
+    "Associate in Fairy Tale Problem Solving"
+];
+
+
+  const nonsenseColleges = [
+    'University of Phoenix',
+    'Aurora Global University',
+    'Crestview University',
+    'Elysium Institute of Technology',
+    'Golden Summit University',
+    'Halcyon College',
+    'Infinity University',
+    'Jupiter Advanced Institute of Science',
+    'Kingsford University',
+    'Luminous University',
+    'Mystic River University',
+    'Nova Galactic University',
+    'Olympus University',
+    'Polaris University',
+    'Quantum University',
+    'Riverside Institute of Technology',
+    'Solaris University of Arts',
+    'Terra Nova University',
+    'Utopia University',
+    'Vortex University',
+    'Whispering Pines University',
+    'Xenon University',
+    'Yonder University',
+    'Zephyr University',
+  ];
+
+  // Function to get a random element from an array
+  function getRandomElement(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
   function generate_uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
       /[xy]/g,
@@ -32,8 +92,8 @@ const EducationHistory = () => {
 
     setEditHistory({
       id: generate_uuidv4(),
-      institution: 'University of Phoenix',
-      degree: 'Bachelors of Science in Information Technology',
+      institution: getRandomElement(nonsenseColleges),
+      degree: getRandomElement(nonsenseDegrees),
       start: dayjs(startDate).startOf('day'),
       end: dayjs(endDate).endOf('day'),
       current: !!((Math.random() * 2) | 0),
