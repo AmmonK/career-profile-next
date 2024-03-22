@@ -58,28 +58,30 @@ const EducationHistory = () => {
       </Typography>
       {!editHistory && (
         <>
-          {history.length === 0 ? (
-            <NoHistory addHandler={addHandler} />
-          ) : (
-            <HistoryList
-              list={history}
-              editHandler={editHandler}
-              deleteHandler={deleteHandler}
-            />
-          )}
+          <Stack direction="column" spacing={4} sx={{ marginTop: '4rem' }}>
+            {history.length === 0 ? (
+              <NoHistory addHandler={addHandler} />
+            ) : (
+              <HistoryList
+                list={history}
+                editHandler={editHandler}
+                deleteHandler={deleteHandler}
+              />
+            )}
 
-          <Stack
-            direction="row"
-            spacing={2}
-            justifyContent={history.length > 0 ? 'flex-start' : 'center'}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => addHandler()}
+            <Stack
+              direction="row"
+              spacing={2}
+              justifyContent={history.length > 0 ? 'flex-start' : 'center'}
             >
-              Add your education history
-            </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => addHandler()}
+              >
+                Add your education history
+              </Button>
+            </Stack>
           </Stack>
         </>
       )}
