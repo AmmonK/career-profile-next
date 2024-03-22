@@ -5,6 +5,19 @@ import WorkHistory from '../workHistory/WorkHistory';
 import EducationHistory from '../educationHistory/EducationHistory';
 
 const CareerProfile = ({ page }) => {
+
+  const generatePage = () => {
+    switch (page) {
+      case 'work-history':
+        return <WorkHistory />;
+      case 'education-history':
+        return <EducationHistory />;
+      default:
+        return <div>unknown section</div>;
+    }
+
+  }
+
   return (
     <>
       <Grid container>
@@ -16,8 +29,7 @@ const CareerProfile = ({ page }) => {
           <Typography gutterBottom sx={{ color: '#00638C' }}>
             Career Profile
           </Typography>
-          {page === 'work-history' && <WorkHistory />}
-          {page === 'education-history' && <EducationHistory />}
+          {generatePage()}
         </Grid>
       </Grid>
     </>

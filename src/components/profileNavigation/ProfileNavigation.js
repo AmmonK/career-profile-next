@@ -15,7 +15,7 @@ const ProfileNavigation = ({ currentPage }) => {
     <>
       <Accordion
         disableGutters
-        expanded={
+        defaultExpanded={
           currentPage == 'work-history' || currentPage == 'education-history'
         }
       >
