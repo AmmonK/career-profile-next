@@ -37,6 +37,10 @@ const HistoryList = ({ list, editHandler, deleteHandler }) => {
                       ? 'Present'
                       : dayjs(item.end).format('MM/YYYY')}
                   </Typography>
+                  <Typography component={'p'}>
+                    Duration: {dayjs(item.end).diff(dayjs(item.start), 'month')}{' '}
+                    months
+                  </Typography>
                 </Stack>
                 <Stack direction="column" spacing={1}>
                   <IconButton

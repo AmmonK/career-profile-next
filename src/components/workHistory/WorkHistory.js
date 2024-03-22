@@ -3,6 +3,7 @@ import NoHistory from './NoHistory';
 import HistoryList from './HistoryList';
 import EditHistory from './EditHistory';
 import { Button, Stack, Typography } from '@mui/material';
+import dayjs from 'dayjs';
 
 const WorkHistory = () => {
   const [history, setHistory] = useState([]);
@@ -19,19 +20,28 @@ const WorkHistory = () => {
     );
   }
 
+  function randomDate(start, end) {
+    return new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
+  }
+
   const addHandler = () => {
+    const startDate = randomDate(new Date(2012, 0, 1), new Date());
+    const endDate = randomDate(startDate, new Date());
+
     setEditHistory({
       id: generate_uuidv4(),
       jobTitle: 'Software Engineer',
       employer: 'University of Phoenix',
-      start: new Date(),
-      end: new Date(),
-      current: true,
+      start: dayjs(startDate).startOf('day'),
+      end: dayjs(endDate).endOf('day'),
+      current: !!((Math.random() * 2) | 0),
     });
   };
 
   const cancelHandler = () => {
-    setEditHistory({});
+    setEditHistory(null);
   };
 
   const editHandler = (item) => {

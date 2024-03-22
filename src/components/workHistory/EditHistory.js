@@ -7,7 +7,7 @@ import {
   FormGroup,
   FormControlLabel,
   Stack,
-  Typography
+  Typography,
 } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from '@mui/x-date-pickers/DateField';
@@ -22,9 +22,8 @@ const EditHistory = ({ item, addMethod, cancelHandler }) => {
     <>
       <Card>
         <CardContent>
-
           <Stack direction="column" spacing={3}>
-          <Typography variant="h5">Add/Edit Work history</Typography>
+            <Typography variant="h5">Add/Edit Work history</Typography>
             <TextField
               label="Job Title"
               variant="outlined"
@@ -50,6 +49,12 @@ const EditHistory = ({ item, addMethod, cancelHandler }) => {
                   onChange={(e) => setWorkItem({ ...workItem, start: e })}
                 />
                 <DateField
+                  sx={{
+                    '& .MuiInputBase-root.Mui-disabled': {
+                      backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    },
+                  }}
+                  disabled={workItem.current}
                   label="End"
                   format="MM/YYYY"
                   value={dayjs(workItem.end)}

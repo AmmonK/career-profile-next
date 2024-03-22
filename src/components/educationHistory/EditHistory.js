@@ -49,6 +49,12 @@ const EditHistory = ({ item, addMethod, cancelHandler }) => {
                   onChange={(e) => setWorkItem({ ...workItem, start: e })}
                 />
                 <DateField
+                  sx={{
+                    '& .MuiInputBase-root.Mui-disabled': {
+                      backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    },
+                  }}
+                  disabled={workItem.current}                
                   label="End"
                   format="MM/YYYY"
                   value={dayjs(workItem.end)}
