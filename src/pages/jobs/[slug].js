@@ -10,7 +10,6 @@ const MyComponent = () => {
 
   return (
     <Box>
-      {/* <DataStatus /> */}
       <CareerProfile page={slug}/>
     </Box>
   );

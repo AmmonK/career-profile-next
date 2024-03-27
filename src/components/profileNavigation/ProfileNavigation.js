@@ -4,21 +4,18 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Stack, Button, Link, Avatar } from '@mui/material';
+import { Stack, Link, Box } from '@mui/material';
 import NextLink from 'next/link';
 import NavAvatar from './NavAvatar';
 
-
-
-const ProfileNavigation = ({ currentPage }) => {
+const ProfileNavigation = ({ currentPage, setShowNav=() => {} }) => {
   return (
-    <>
-      <Accordion
-        disableGutters
-        defaultExpanded={
-          currentPage == 'work-history' || currentPage == 'education-history'
-        }
-      >
+    <Box
+      sx={{
+        minWidth: '300px',
+      }}
+    >
+      <Accordion disableGutters defaultExpanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon fontSize="large" />}
           aria-controls="panel1-content"
@@ -29,7 +26,7 @@ const ProfileNavigation = ({ currentPage }) => {
           }}
         >
           <Stack direction="row" spacing={1} alignItems="center">
-            <NavAvatar/>
+            <NavAvatar />
             <Typography>Portfolio</Typography>
           </Stack>
         </AccordionSummary>
@@ -47,6 +44,7 @@ const ProfileNavigation = ({ currentPage }) => {
                 }),
                 '&:hover': { color: '#001823' },
               }}
+              onClick={() => setShowNav(false)}
             >
               Work History
             </Link>
@@ -62,6 +60,7 @@ const ProfileNavigation = ({ currentPage }) => {
                 }),
                 '&:hover': { color: '#001823' },
               }}
+              onClick={() => setShowNav(false)}
             >
               Education
             </Link>
@@ -102,7 +101,7 @@ const ProfileNavigation = ({ currentPage }) => {
         </AccordionSummary>
         <AccordionDetails></AccordionDetails>
       </Accordion>
-    </>
+    </Box>
   );
 };
 
